@@ -28,9 +28,18 @@ class MainActivity : AppCompatActivity() {
         val height = findViewById<EditText>(R.id.editTextHeight)
         val viewBMI = findViewById<TextView>(R.id.textViewBMI)
 
-        var bmi = weight.text.toString().toDouble() / ((height.text.toString().toDouble()/100).pow(2.0))
-        viewBMI.text = "BMI : " + String.format("%.2f",bmi.toString().toDouble())
-        getBMIImg(bmi)
+        if(!weight.text.isBlank() && !height.text.isBlank()) {
+            var bmi =
+                weight.text.toString().toDouble() / ((height.text.toString().toDouble() / 100).pow(
+                    2.0
+                ))
+            viewBMI.text = "BMI : " + String.format("%.2f", bmi.toString().toDouble())
+            getBMIImg(bmi)
+        }
+        else{
+            viewBMI.text = "BMI : 0"
+            getBMIImg(0.0)
+        }
     }
 
     private fun getBMIImg(bmi : Double){
